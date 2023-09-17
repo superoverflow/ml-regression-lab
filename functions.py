@@ -3,10 +3,6 @@ from numpy.typing import ArrayLike
 from functools import reduce
 
 
-def generate_data(size: int):
-    pass
-
-
 def generate_net_zero_series(size: int) -> ArrayLike:
     pos_series = abs(np.random.randn(size // 2))
     neg_series = -1 * pos_series
@@ -54,7 +50,15 @@ def arrange_series(
     return np.array(result)
 
     
+def normalise_series(series: "np.array[np.float64]"):
+    max_value = max(series)
+    min_value = min(series)
+    factor = max_value - min_value
+    return ( series - min_value ) / factor
 
+
+def pad_series():
+    ...
 
 
 
