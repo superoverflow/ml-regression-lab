@@ -3,8 +3,11 @@ from functions import (
     arrange_series,
     accumulate_series,
     normalise_series,
+    transform_series,
+    pad_series
 )
 import numpy as np
+from numpy.testing import assert_equal
 
 
 def test_generate_data_serieses_base():
@@ -33,3 +36,13 @@ def test_normalise_series_base():
     result = normalise_series(mock_series)
     expected = np.array([0.0, 0.375, 1.0, 0.5])
     np.testing.assert_almost_equal(result, expected)
+
+
+def test_pad_series_base():
+    result = pad_series(series = np.array([-2, 1, 6, 2]), left_size=3, right_size=2)
+    assert len(result) == 9
+
+
+def test_transform_series_base():
+    result = transform_series(series = np.array([-2.0, 1.0, 6.0, 2.2]), line = np.array([1, 2, 3, 4]))
+    assert_equal(result, np.array([-1. ,  3. ,  9. ,  6.2]))
